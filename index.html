@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matematika Teknik</title>
+<meta name="description" content="Bahan ajar Matematika Teknik 13 bab: diferensial, integral, dan persamaan diferensial untuk Teknik Mesin, dengan presentasi interaktif, slide visual, dan modul PDF.">
+<style>
+  :root{
+    --bg:#F3F5F9; --panel:#FFFFFF; --ink:#18213A; --soft:#5E6A82; --line:#DDE3EC;
+    --navy:#14284B; --navy2:#1F3F73; --yellow:#F5B700; --cyan:#12A4C4; --chip:#EEF2F8; --cyan-bg:#E2F5FA;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0F1524; --panel:#18213A; --ink:#E8ECF4; --soft:#A3AEC4; --line:#2A3654; --chip:#22304F; --cyan-bg:#13324170; }
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;}
+  header{background:linear-gradient(120deg,var(--navy),var(--navy2));color:#fff;padding:40px 16px 56px;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 16px;}
+  header .wrap{padding:0;}
+  .tag{display:inline-block;background:var(--yellow);color:#2B2100;font-weight:800;font-size:12px;letter-spacing:.06em;padding:4px 10px;border-radius:20px;text-transform:uppercase;}
+  h1{margin:12px 0 6px;font-size:clamp(24px,4vw,34px);line-height:1.2;}
+  header p{margin:0;color:#C8D3EA;max-width:700px;font-size:15px;}
+  .legend{margin:-30px auto 22px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;display:flex;gap:8px 20px;flex-wrap:wrap;font-size:13px;color:var(--soft);box-shadow:0 6px 20px rgba(20,40,75,.08);}
+  .legend b{color:var(--ink);}
+  h2.sec{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:4px 0 12px;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px;margin-bottom:24px;}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;}
+  .cover{display:block;border:0;padding:0;cursor:zoom-in;background:#0B1424;position:relative;}
+  .cover img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;}
+  .cover span{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.7);color:#fff;font-size:12px;font-weight:700;padding:3px 8px;border-radius:6px;}
+  .body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:10px;flex:1;}
+  .num{font-family:"SFMono-Regular",Consolas,monospace;font-weight:800;font-size:12px;color:var(--cyan);background:var(--cyan-bg);padding:3px 9px;border-radius:20px;align-self:flex-start;}
+  .card h3{margin:0;font-size:16.5px;line-height:1.3;flex:1;}
+  .actions{display:flex;gap:6px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:5px;text-decoration:none;font-weight:700;font-size:13px;padding:8px 11px;border-radius:8px;border:1px solid var(--line);color:var(--ink);background:transparent;cursor:pointer;font-family:inherit;}
+  .btn.main{background:var(--cyan);border-color:var(--cyan);color:#fff;}
+  .viewer{position:fixed;inset:0;background:rgba(6,10,20,.95);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:50;padding:14px;}
+  .viewer.open{display:flex;}
+  .viewer h4{color:#fff;margin:0 0 10px;font-size:15px;text-align:center;}
+  .viewer img{max-width:100%;max-height:calc(100vh - 120px);border-radius:8px;box-shadow:0 10px 40px rgba(0,0,0,.5);}
+  .vbar{display:flex;gap:10px;align-items:center;margin-top:12px;color:#fff;font-size:14px;flex-wrap:wrap;justify-content:center;}
+  .vbar button{font:inherit;font-weight:700;background:#24334F;color:#fff;border:0;border-radius:8px;padding:9px 14px;cursor:pointer;}
+  .vbar button:hover{background:var(--cyan);}
+  footer{border-top:1px solid var(--line);padding:18px 0 40px;font-size:12.5px;color:var(--soft);}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <span class="tag">Matematika Teknik · Teknik Mesin · PNUP</span>
+    <h1>Matematika Teknik</h1>
+    <p>Bahan ajar 13 bab tentang diferensial, integral, dan persamaan diferensial, lengkap dengan contoh penerapan di bidang teknik mesin. Setiap bab tersedia dalam beberapa bentuk.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="legend">
+    <span><b>🖼️ Slide</b> galeri slide visual (klik gambar sampul)</span>
+    <span><b>▶ Presentasi</b> versi interaktif berbasis web</span>
+    <span><b>📘 Modul</b> bahan ajar lengkap (PDF) dengan latihan dan kunci evaluasi mandiri</span>
+  </div>
+  <div id="groups"></div>
+</main>
+
+<div class="viewer" id="viewer" role="dialog" aria-modal="true" aria-label="Penampil slide">
+  <h4 id="vtitle"></h4>
+  <img id="vimg" alt="">
+  <div class="vbar">
+    <button id="prev">← Sebelumnya</button>
+    <span id="vcount"></span>
+    <button id="next">Berikutnya →</button>
+    <button id="close">✕ Tutup</button>
+  </div>
+</div>
+
+<footer class="wrap">
+  Politeknik Negeri Ujung Pandang · Semester Ganjil 2026/2027. Disusun oleh Muas M.<br>
+  Kerjakan latihan di modul lebih dulu sebelum membuka bagian kunci evaluasi mandiri.
+</footer>
+
+<script>
+  const BABS = [{"n": 1, "t": "Koefisien Diferensial Baku", "pres": null, "modul": "bab-01/modul-bab-01.pdf", "slides": 20, "slidepdf": "bab-01/slide-bab-01.pdf"}, {"n": 2, "t": "Fungsi dari Suatu Fungsi, Perkalian, dan Pembagian", "pres": "bab-02/presentasi.html", "modul": "bab-02/modul-bab-02.pdf", "slides": 18, "slidepdf": "bab-02/slide-bab-02.pdf"}, {"n": 3, "t": "Diferensial Fungsi Sinus, Cosinus, dan Transenden", "pres": "bab-03/presentasi.html", "modul": "bab-03/modul-bab-03.pdf", "slides": 20, "slidepdf": "bab-03/slide-bab-03.pdf"}, {"n": 4, "t": "Diferensial Fungsi Implisit", "pres": null, "modul": "bab-04/modul-bab-04.pdf", "slides": 20, "slidepdf": "bab-04/slide-bab-04.pdf"}, {"n": 5, "t": "Diferensial Persamaan Parametrik", "pres": "bab-05/presentasi.html", "modul": "bab-05/modul-bab-05.pdf", "slides": 18, "slidepdf": "bab-05/slide-bab-05.pdf"}, {"n": 6, "t": "Penerapan Diferensial", "pres": "bab-06/presentasi.html", "modul": "bab-06/modul-bab-06.pdf", "slides": 18, "slidepdf": "bab-06/slide-bab-06.pdf"}, {"n": 7, "t": "Integral Tak Tentu dan Integral Baku", "pres": "bab-07/presentasi.html", "modul": "bab-07/modul-bab-07.pdf", "slides": 18, "slidepdf": "bab-07/slide-bab-07.pdf"}, {"n": 8, "t": "Integral Fungsi Linier dalam x", "pres": "bab-08/presentasi.html", "modul": "bab-08/modul-bab-08.pdf", "slides": 18, "slidepdf": "bab-08/slide-bab-08.pdf"}, {"n": 9, "t": "Integral Bentuk Perkalian dan Pembagian", "pres": "bab-09/presentasi.html", "modul": "bab-09/modul-bab-09.pdf", "slides": 18, "slidepdf": "bab-09/slide-bab-09.pdf"}, {"n": 10, "t": "Penerapan Integral", "pres": "bab-10/presentasi.html", "modul": "bab-10/modul-bab-10.pdf", "slides": 18, "slidepdf": "bab-10/slide-bab-10.pdf"}, {"n": 11, "t": "Persamaan Diferensial Orde I", "pres": "bab-11/presentasi.html", "modul": "bab-11/modul-bab-11.pdf", "slides": 18, "slidepdf": "bab-11/slide-bab-11.pdf"}, {"n": 12, "t": "Persamaan Diferensial Orde II", "pres": "bab-12/presentasi.html", "modul": "bab-12/modul-bab-12.pdf", "slides": 18, "slidepdf": "bab-12/slide-bab-12.pdf"}, {"n": 13, "t": "Penerapan PD pada Sistem Teknik Mesin", "pres": "bab-13/presentasi.html", "modul": "bab-13/modul-bab-13.pdf", "slides": 18, "slidepdf": "bab-13/slide-bab-13.pdf"}];
+  const GROUPS = [["Kalkulus Diferensial",[1,2,3,4,5,6]],["Kalkulus Integral",[7,8,9,10]],["Persamaan Diferensial",[11,12,13]]];
+  const pad = i => String(i).padStart(2,"0");
+  const root = document.getElementById("groups");
+  GROUPS.forEach(([name, nums])=>{
+    const h=document.createElement("h2"); h.className="sec"; h.textContent=name; root.appendChild(h);
+    const g=document.createElement("section"); g.className="grid";
+    nums.forEach(n=>{
+      const b=BABS.find(x=>x.n===n), dir=`bab-${pad(n)}/slide/`;
+      const el=document.createElement("article"); el.className="card"; el.id="bab-"+pad(n);
+      el.innerHTML=`${b.slides?`<button class="cover" data-bab="${n}" aria-label="Buka slide Bab ${n}"><img loading="lazy" src="${dir}01-kecil.jpg" alt="Sampul slide Bab ${n}"><span>🖼️ ${b.slides} slide</span></button>`:""}
+        <div class="body"><span class="num">BAB ${n}</span><h3>${b.t}</h3>
+        <div class="actions">
+          ${b.slides?`<button class="btn main" data-bab="${n}">🖼️ Slide</button>`:""}
+          ${b.pres?`<a class="btn" href="${b.pres}">▶ Presentasi</a>`:""}
+          ${b.modul?`<a class="btn" href="${b.modul}" target="_blank" rel="noopener">📘 Modul PDF</a>`:""}
+          ${b.slidepdf?`<a class="btn" href="${b.slidepdf}" target="_blank" rel="noopener">📄 Slide PDF</a>`:""}
+        </div></div>`;
+      g.appendChild(el);
+    });
+    root.appendChild(g);
+  });
+
+  const viewer=document.getElementById("viewer"), vimg=document.getElementById("vimg"), vcount=document.getElementById("vcount"), vtitle=document.getElementById("vtitle");
+  let cur=null, idx=1;
+  function openV(n,i){ cur=BABS.find(x=>x.n===n); idx=i; vimg.src=`bab-${pad(n)}/slide/${pad(i)}.jpg`; vimg.alt=`Bab ${n}, slide ${i}`; vtitle.textContent=`Bab ${n}: ${cur.t}`; vcount.textContent=`${i} / ${cur.slides}`; viewer.classList.add("open"); }
+  function step(d){ openV(cur.n, ((idx-1+d+cur.slides)%cur.slides)+1); }
+  document.querySelectorAll("[data-bab]").forEach(b=>b.onclick=()=>openV(+b.dataset.bab,1));
+  document.getElementById("prev").onclick=()=>step(-1);
+  document.getElementById("next").onclick=()=>step(1);
+  document.getElementById("close").onclick=()=>viewer.classList.remove("open");
+  viewer.onclick=e=>{ if(e.target===viewer) viewer.classList.remove("open"); };
+  document.addEventListener("keydown",e=>{ if(!viewer.classList.contains("open")) return;
+    if(e.key==="ArrowRight") step(1); else if(e.key==="ArrowLeft") step(-1); else if(e.key==="Escape") viewer.classList.remove("open"); });
+</script>
+</body>
+</html>
